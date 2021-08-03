@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+      
+      {% block content %}
+      <h2 class="mb-3">{{view.kwargs.username}}'s resumes </h2>
+            {% for resume in resumes %}
+                  <article class="media content-section ml-5">
+                        <div class="media-body">
+                        <div class="article-metadata">
+                        <small class="text-muted float-right mt-3">{{ resume.date|date:"d F, Y"}}</small>
+                        </div>
+                        <h2><a class="article-title" href="{% url 'resume-detail' resume.id %}">{{ resume.title }}</a></h2>
+                        <p class="article-content">{{ resume.profession }}</p>
+                        </div>
+                  </article>
+            {% endfor %}
+      {% endblock content %}
+    

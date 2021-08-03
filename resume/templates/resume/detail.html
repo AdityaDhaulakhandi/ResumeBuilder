@@ -1,0 +1,113 @@
+{% load static %}
+      {% block content %}
+      <head>
+            <title>Resume</title>
+            <link href="{% static 'resume/template.css' %}" rel='stylesheet' type='text/css'>
+      </head>
+      <style>
+            a.btn-update:link, a.btn-update:visited {
+            background-color: white;
+            color: black;
+            border: 1px solid green;
+            border-radius: 8px;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            float:right;
+            }           
+
+            a.btn-update:hover, a:active {
+            background-color: green;
+            color: white;
+            }
+
+            a.btn-delete:link, a.btn-delete:visited {
+            background-color: white;
+            color: black;
+            border: 1px solid red;
+            border-radius: 8px;
+            padding: 5px 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            float:right;
+            margin-right:5px;
+            }
+            a.btn-delete:hover, a:active {
+            background-color: red;
+            color: white;
+            }
+      </style>
+
+
+
+      <body>             
+      <div class="container">
+      <div class="button">
+            {% if resume.owner.id == user.id  %}
+                  <a class="btn-update" href="{% url 'resume-update' resume.id %}">
+                        Update
+                        </a>
+                        <a class="btn-delete" href="{% url 'resume-delete' resume.id %}">
+                        Delete
+                        </a>
+            {% endif %} 
+      </div>
+      <div class="header">
+            <div class="full-name">
+                  <span class="name">{{resume.owner.username}}</span>
+            </div>
+            
+            <div class="contact-info">
+                  <span class="email">Email:</span>
+                  <span class="email-val">{{resume.owner.email}}</span>
+                  <span class="separator"></span>
+                  <span class="phone">Phone: </span>
+                  <span class="phone-val">{{resume.contact}}</span>
+            </div>
+
+            <div class="about">
+                  <span class="position">{{resume.profession}} </span>
+                  <br>
+                  <span class="desc">
+                  I'm a {{resume.profession}} skilled in {{resume.skills}}. I'm motivated, result-focused and seeking a successful team-oriented company with opportunity to grow. 
+                  </span>
+            </div>
+      </div>
+      <div class="details">
+      <div class="section">
+            <div class="section__title">Experience</div>
+                  <div class="section__list">
+                        <div class="section__list-item">
+                              <div class="left">
+                                    <div class="name">{{resume.experience}}</div>
+                              </div>
+                        </div>
+                  </div>
+      </div>
+       <div class="section">
+            <div class="section__title">Education</div>
+                  <div class="section__list">
+                        <div class="section__list-item">
+                              <div class="left">
+                                    <div class="name">{{resume.education}}</div>
+                              </div>
+                        </div>
+                  </div>
+      </div>
+      <div class="section">
+            <div class="section__title">Skills</div>
+                  <div class="section__list">
+                        <div class="section__list-item">
+                              <div class="left">
+                                    <div class="name">{{resume.skills}}</div>
+                              </div>
+                        </div>
+                  </div>
+      </div>
+      </div>
+      </div>      
+      </body>
+      {% endblock content %}
+    

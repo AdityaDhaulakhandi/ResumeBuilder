@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+      <div class="content-section">
+      <div class="media">
+      <img class="rounded-circle account-img" src="{{user.profile.image.url }}">
+      <div class="media-body">
+      <h2 class="account-heading">{{user.username}}</h2>
+      <p class="text-secondary">Contact Me : {{user.email}}</p>
+      <p class="text-secondary">Age: {{user.profile.age}}</p>
+      </div>            
+      </div>
+            <div class="form-group">
+                  <a class="btn btn-outline-info" href="{% url 'users-profile-update' %}" >
+                  Update Profile
+                  </a>
+            </div>
+      </div>
+      
+      <div class="container">
+      {% if user.profile.get_user_resume.count == 0 %}      
+            <a class="nav-link text-muted" href="{% url 'resume-create'%}"><h6>No Resume Yet</h6> Create your First one!</a>
+      {% else %}
+      <hr><h4 class="text-muted ">My Resumes</h4><hr>
+            <div class="row">
+            {% for resume in user.profile.get_user_resume %}
+                  <article class="media content-section col"  id="post-media">
+                        <div class="media-body">
+                              <figure class="figure">
+                                    <a href={% url 'resume-detail' resume.id %}>
+                                          {{ resume.title }}
+                                    </a>
+                              </figure>
+                        <div>
+                  </article>
+            {% endfor %}
+            </div>
+      {% endif %} 
+      </div>     
+      </article>
+      
+
+{% endblock content %}
+

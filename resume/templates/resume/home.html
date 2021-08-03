@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+      {% block content %}
+      <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+            <h3 class="display-4">Welcome!</h3>
+            <p class="lead">
+                  This is the right place to start your Professional journey by Creating your First Resume!! Start by clicking the "Create CV"
+            </p>
+            <hr class="my-4">
+            <h4 class="text-muted">What is A Resume? And why you need it?</h4>
+            <p class="lead">It details your skills and training, work experience, and education, and, most importantly, the accomplishments you have made with past employers. It should also inform the employer of your career objective (the job you are seeking) and communicate in a concise manner the benefits you will bring to the job if hired.</p>
+            <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'resume-create'%}" role="button">Create CV!</a>
+            </p>
+      </div>
+      </div>
+      <p class="display-4">Some of our user resumes</p>
+            {% for resume in resumes  %}
+                  <article class="media content-section">
+                        <img src="{{resume.owner.profile.image.url }}" class="rounded-circle article-img">
+                        <div class="media-body">
+                              <div class="article-metadata">
+                              <small class="text-muted float-right mt-3">{{ resume.date|date:"d F, Y"}}</small>
+                              </div>
+                        <h3><a class="article-title ml-2" href="{% url 'resume-detail' resume.id %}">{{ resume.title }}</a></h3>
+                        <h5><a class="article-title ml-2" href="{% url 'user-resume' resume.owner.username %}">{{ resume.owner.username }}</a></h5>
+                        <hr>
+                        <h6><p class="article-content">Profession: {{ resume.profession }}</p></h6>
+                        </div>
+                  </article>
+            {% endfor %}
+      {% endblock content %}
+    
